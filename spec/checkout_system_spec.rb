@@ -3,18 +3,20 @@ RSpec.describe CheckoutSystem do
   let(:product_1) { CheckoutSystem::Product.new(product_code: '001', name: 'Lavender heart', price: 9.25) }
   let(:product_2) { CheckoutSystem::Product.new(product_code: '002', name: 'Personalised cufflinks', price: 45.00) }
   let(:product_3) { CheckoutSystem::Product.new(product_code: '003', name: 'Kids T-shirt', price: 19.95) }
-  
+
   # promotion rule
   # rule when spending £60
-  let(:promotion_rule_1) { CheckoutSystem::PromotionRule.new(promotion_name: 'promotion 60 price', promotion_type: 'on_total_price', 
-                                             min_price: 60.0, discount_rate: 10) }
+  let(:promotion_rule_1) do
+    CheckoutSystem::PromotionRule.new(promotion_name: 'promotion 60 price', promotion_type: 'on_total_price',
+                                      min_price: 60.0, discount_rate: 10)
+  end
   # rule when buying 2 or more lavender product
-  let(:promotion_rule_2) { 
-    promo = CheckoutSystem::PromotionRule.new(promotion_name: 'promotion lavender x2', promotion_type: 'on_item_price', 
-                                             promotion_price: 8.5, min_quantity: 2)
-    promo.products << product_1 # add product that need to apply promotion
+  let(:promotion_rule_2) do
+    promo = CheckoutSystem::PromotionRule.new(promotion_name: 'promotion lavender x2', promotion_type: 'on_item_price',
+                                              promotion_price: 8.5, min_quantity: 2)
+    promo.add_product product_1 # add product that need to apply promotion
     promo
-  }
+  end
 
   shared_examples_for 'return total price' do
     it do
@@ -54,7 +56,7 @@ RSpec.describe CheckoutSystem do
       end
       context 'no apply any promotions rules' do
         let(:promotion_rules) { [] }
-        let(:expected_total_price) { 38.45}
+        let(:expected_total_price) { 38.45 }
 
         it_should_behave_like 'return total price'
       end
@@ -95,13 +97,13 @@ RSpec.describe CheckoutSystem do
 
   describe 'payment by custom promotion rules' do
     # if buying 3 or more than, the price will be descreased to 15.0
-    let(:promotion_rule_3) { 
-      rule = CheckoutSystem::PromotionRule.new(promotion_name: 'promotion kids x3', promotion_type: 'on_item_price', 
-      promotion_price: 15.0, min_quantity: 3) 
-      rule.products << product_3
+    let(:promotion_rule_3) do
+      rule = CheckoutSystem::PromotionRule.new(promotion_name: 'promotion kids x3', promotion_type: 'on_item_price',
+                                               promotion_price: 15.0, min_quantity: 3)
+      rule.add_product product_3
       rule
-    }
-    
+    end
+
     context 'product code: 001, 003, 003, 003' do
       let(:basket) { [product_1, product_3, product_3, product_3] }
       context 'rules: spending over £60 and buy 3 or more kis t-shirt' do
@@ -112,7 +114,7 @@ RSpec.describe CheckoutSystem do
       end
       context 'no apply any promotions rules' do
         let(:promotion_rules) { [] }
-        let(:expected_total_price) { 69.1 } # should be same
+        let(:expected_total_price) { 69.1 }
 
         it_should_behave_like 'return total price'
       end
