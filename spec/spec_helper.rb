@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "checkout_system"
+require 'pry'
+require 'bigdecimal'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
