@@ -1,11 +1,10 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "checkout_system/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "checkout_system"
-  spec.version       = CheckoutSystem::VERSION
+  spec.version       = "0.1"
   spec.authors       = ["Tai Tran"]
   spec.email         = ["transytai12a1@gmail.com"]
 

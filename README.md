@@ -52,32 +52,4 @@ Total price expected: £73.76
 
 ## Result Specs
 
-```
-CheckoutSystem
-  Product
-    mass assignment
-      it should behave like mass assignment
-        allows to read and write
-  PromotionRule
-    mass assignment
-      it should behave like mass assignment
-        allows to read and write
-  Checkout
-    attributes
-      mass assignment
-        it should behave like mass assignment
-          allows to read and write
-    payment
-      product code: 001, 002, 003
-        rules: spending over £60 and buy 2 or more lavender
-          return total price
-      product code: 001, 003, 001
-        rules: spending over £60 and buy 2 or more lavender
-          return total price
-      product code: 001, 002, 001, 003
-        rules: spending over £60 and buy 2 or more lavender
-          return total price
-
-Finished in 0.00456 seconds (files took 0.65444 seconds to load)
-6 examples, 0 failure
-```
+[![video](result_rspec.gif)](result_rspec.gif)

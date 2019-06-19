@@ -1,7 +1,8 @@
 require "bundler/setup"
 require "checkout_system"
-require 'pry'
 require 'bigdecimal'
+
+Dir["#{File.dirname(__FILE__)}/shared/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
